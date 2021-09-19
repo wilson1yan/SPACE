@@ -31,6 +31,5 @@ class H5Py(Dataset):
     def __getitem__(self, index):
         image = self._images[index]
         image = torch.from_numpy(image / 255).permute(2, 0, 1).float()
-        image = F.interpolate(image, size=128)
-        print(image.min(), image.max(), image.shape)
+        image = F.interpolate(image.unsqueeze(0), size=(128, 128)).squeeze(0)
         return image
