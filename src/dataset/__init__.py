@@ -1,5 +1,6 @@
 from .atari import Atari
 from .obj3d import Obj3D
+from .h5py import H5Py
 from torch.utils.data import DataLoader
 
 
@@ -14,6 +15,8 @@ def get_dataset(cfg, mode):
         return Obj3D(cfg.dataset_roots.OBJ3D_SMALL, mode)
     elif cfg.dataset == 'OBJ3D_LARGE':
         return Obj3D(cfg.dataset_roots.OBJ3D_LARGE, mode)
+    elif cfg.dataset == 'CUSTOM':
+        return H5Py(cfg.dataset_roots.CUSTOM, mode)
 
 def get_dataloader(cfg, mode):
     assert mode in ['train', 'val', 'test']
